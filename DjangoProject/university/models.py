@@ -223,7 +223,6 @@ class GameDetailPitcher(models.Model):
     BB = models.PositiveSmallIntegerField() # 볼넷
     HBP = models.PositiveSmallIntegerField() # 사구 
     pitches = models.PositiveSmallIntegerField() # 공갯수 
-
     
     def __str__(self):
         return str(self.game.game_date) + " 경기 " + self.player.name  + "선수 성적"
