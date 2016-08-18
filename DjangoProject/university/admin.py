@@ -1,5 +1,8 @@
 from django.contrib import admin
+# from django.contrib.auth.admin import UserAdmin
 from university.models import *
+# from university.forms import CustomUserChangeForm, CustomUserCreationForm
+
 
 admin.site.register(Team)
 admin.site.register(League)
