@@ -25,7 +25,7 @@ class Team(models.Model):
     name = models.CharField(max_length=50)
     manager = models.CharField(max_length=20, blank=True) # 팀 관리자, 처음 생성자 아이디 값 받을 수도
     university = models.ForeignKey(University)
-    rate = models.IntegerField(blank=True) # 승률, 계산해서 들어갈 값
+    rate = models.DecimalField(max_digits=20,decimal_places=4, blank=True, null=True) # 승률, 계산해서 들어갈 값
     
     def __str__(self):
         return self.name
@@ -36,7 +36,7 @@ class League(models.Model):
     """
     name = models.CharField(max_length=100)
     start_date = models.DateField(auto_now_add=True)
-    finish_date = models.DateField(blank=True) # 리그 기간에 대한 정보
+    finish_date = models.DateField(blank=True, null=True) # 리그 기간에 대한 정보
    
     def __str__(self):
         return self.name 
@@ -117,7 +117,7 @@ class Player(AbstractBaseUser, PermissionsMixin):
 #        super(Player, self).save(*args, **kwargs)
 
     def __str__(self):
-        return self.name
+        return self.email
 
 class GamePlace(models.Model):
     """게임이 진행되는 경기장 정보 
@@ -162,7 +162,7 @@ class PitcherHasTeam(models.Model):
     win = models.PositiveSmallIntegerField(blank=True, null=True) # 승리  
     lose = models.PositiveSmallIntegerField(blank=True, null=True) # 패배
     ininig = models.PositiveSmallIntegerField(blank=True, null=True) # 이닝 수
-    save = models.PositiveSmallIntegerField(blank=True, null=True) # 세이브 
+    saves = models.PositiveSmallIntegerField(blank=True, null=True) # 세이브 
     hold = models.PositiveSmallIntegerField(blank=True, null=True) # 홀드 
     hit = models.PositiveSmallIntegerField(blank=True, null=True) # 피안타 갯수
     HR = models.PositiveSmallIntegerField(blank=True, null=True) # 피홈런 갯수 
@@ -170,7 +170,7 @@ class PitcherHasTeam(models.Model):
     BB = models.PositiveSmallIntegerField(blank=True, null=True) # 볼넷 
     HBP = models.PositiveSmallIntegerField(blank=True, null=True) # 사구
     K = models.PositiveSmallIntegerField(blank=True, null=True) # 삼진
-    pitches = models.PositiveSmallIntegerField(blank=True, null=True) # 던진 공 갯수 
+    pitches = models.PositiveIntegerField(blank=True, null=True) # 던진 공 갯수 
 
     def __str__(self):
         return self.team.name +" 팀의 " + self.player.name 
@@ -208,7 +208,7 @@ class PitcherHasLeague(models.Model):
     win = models.PositiveSmallIntegerField(blank=True, null=True) # 승리  
     lose = models.PositiveSmallIntegerField(blank=True, null=True) # 패배
     ininig = models.PositiveSmallIntegerField(blank=True, null=True) # 이닝 수
-    save = models.PositiveSmallIntegerField(blank=True, null=True) # 세이브 
+    saves = models.PositiveSmallIntegerField(blank=True, null=True) # 세이브 
     hold = models.PositiveSmallIntegerField(blank=True, null=True) # 홀드 
     hit = models.PositiveSmallIntegerField(blank=True, null=True) # 피안타 갯수
     HR = models.PositiveSmallIntegerField(blank=True, null=True) # 피홈런 갯수 
@@ -281,7 +281,7 @@ class GameDetailPitcher(models.Model):
     game = models.ForeignKey(GameSchedule)
     player = models.ForeignKey(Player)
     win = models.BooleanField() # 승패 
-    save = models.BooleanField() # 세이브 여부
+    saves = models.BooleanField() # 세이브 여부
     hold = models.BooleanField() # 홀드 여부 
     HR = models.PositiveSmallIntegerField(blank=True, null=True) # 피홈런
     hit = models.PositiveSmallIntegerField(blank=True, null=True) # 피안타 
