@@ -6,8 +6,13 @@
     </head>
 
     <body>
-        {{ player_data.team.name }}
-        {{ player_data.league.name }}
+        {% for team in player_data.team.all %}
+            {{ team.name }}
+        {% endfor %}
+        {% for league in player_data.league.all %}
+            {{ league.name }}
+        {% endfor %}
+
         {{ player_data.university.name }} 
     </body>
 

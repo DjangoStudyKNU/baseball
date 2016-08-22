@@ -83,8 +83,8 @@ class Player(AbstractBaseUser, PermissionsMixin):
     weight = models.PositiveSmallIntegerField(blank=True, null=True) # 선수 몸무게 
     date_joined = models.DateTimeField(default=timezone.now) # 회원가입 날짜 
     player_info = models.CharField(max_length=20, blank=True) # 우투우타 등의 정보
-    team = models.ManyToManyField(Team, null=True)
-    league = models.ManyToManyField(League, null=True)
+    team = models.ManyToManyField(Team, blank=True)
+    league = models.ManyToManyField(League, blank=True)
     university = models.ForeignKey(University, null=True)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=False)
