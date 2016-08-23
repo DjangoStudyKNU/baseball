@@ -21,4 +21,19 @@ class IndexView(ListView):
     def get_queryset(self):
         return Player.objects.filter(id=self.request.user.id)[0]
 
+    def get_context_data(self, **kwargs):
+        context = super(IndexView, self).get_context_data(**kwargs)
+        context['object_list'] = ['Team', 'League', 'University']
+        return context
+
+class LeagueDetailView(DetailView):
+    model = League
+
+class TeamDetailView(DetailView):
+    model = Team
+
+class UniversityDetailView(DetailView):
+    model = University
+
+
 
