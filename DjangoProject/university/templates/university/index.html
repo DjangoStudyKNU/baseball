@@ -7,13 +7,13 @@
 
     <body>
         {% for team in player_data.team.all %}
-            {{ team.name }}
+        <a href="{% url 'university:team_detail' team.pk  %}">{{ team.name }}</a>
         {% endfor %}
         {% for league in player_data.league.all %}
-            {{ league.name }}
+        <a href="{% url 'university:league_detail' league.pk %}">{{ league.name }}</a>
         {% endfor %}
 
-        {{ player_data.university.name }} 
+        <a href="{% url 'university:university_detail' university.pk %}">{{ player_data.university.name }}</a> 
     </body>
 
 </html>
