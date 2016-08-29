@@ -1,0 +1,10 @@
+{% extends "base_university.html" %}
+
+{% block dashboard_header %}Team Detail{% endblock %}
+
+{% block dashboard %}
+<p>{{ object.name }}</p>
+<p>{{ object.manager }}</p>
+<p>{{ object.university }}</p>
+<p>{{ object.rate }}</p>
+{% endblock %}

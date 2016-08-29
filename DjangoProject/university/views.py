@@ -35,5 +35,15 @@ class TeamDetailView(DetailView):
 class UniversityDetailView(DetailView):
     model = University
 
+class LeagueList(ListView):
+    model = League
+
+class TeamList(ListView):
+    model = Team
+
+class UniversityList(ListView):
+    model = University
+
+
 
 
