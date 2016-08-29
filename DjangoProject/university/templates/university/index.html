@@ -1,11 +1,23 @@
+{% extends "base_university.html" %}
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8" />
-        <title></title>
+        <title>{% block title %}{% endblock %}</title>
     </head>
 
     <body>
+        {% block header %}
+        {{ block.super }}
+        {% endblock %}
+
+        {% block sidebar %}
+        {{ block.super }}
+        {% endblock %}
+
+        {% block dashboard %}
+
+
+
         {% for team in player_data.team.all %}
         <p><a href="{% url 'university:team_detail' team.pk  %}">{{ team.name }}</a></p>
         {% endfor %}
@@ -13,7 +25,9 @@
         <p><a href="{% url 'university:league_detail' league.pk %}">{{ league.name }}</a></p>
         {% endfor %}
 
-        <p><a href="{% url 'university:university_detail' university.pk %}">{{ player_data.university.name }}</a></p> 
+        <p><a href="{% url 'university:university_detail' player_data.university.pk %}">{{ player_data.university.name }}</a></p> 
+    
+        {% endblock %}
     </body>
 
 </html>
