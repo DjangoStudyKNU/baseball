@@ -68,12 +68,9 @@ class CustomUserManager(BaseUserManager):
     def create_superuser(self, email, password, **extra_fields):
         return self._create_user(email, password, True, True, **extra_fields)
 
-class Player(AbstractBaseUser, PermissionsMixin):
-    """각 선수들에 대한 정보 
-    경기 성적이 아닌 선수 신상 정보 
-    AbstractBaseUser 클래스를 상속 받아 수정
-    email을 id 값으로 사용
-    UserManager도 수정 필요 
+class BaseUser(AbstractBaseUser, PermissionsMixin):
+    """두 app의 상위 클래스 
+    아마추어 플레이어와 유니벓시티 플레이어의 상위 클래스
     """
     email = models.EmailField(_('email address'), unique=True, max_length=255)
     name = models.CharField(_('name'), max_length=30, blank=True)
@@ -83,9 +80,6 @@ class Player(AbstractBaseUser, PermissionsMixin):
     weight = models.PositiveSmallIntegerField(blank=True, null=True) # 선수 몸무게 
     date_joined = models.DateTimeField(default=timezone.now) # 회원가입 날짜 
     player_info = models.CharField(max_length=20, blank=True) # 우투우타 등의 정보
-    team = models.ManyToManyField(Team, blank=True)
-    league = models.ManyToManyField(League, blank=True)
-    university = models.ForeignKey(University, null=True)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=False)
     USERNAME_FIELD = 'email'
@@ -99,23 +93,23 @@ class Player(AbstractBaseUser, PermissionsMixin):
     def get_absolute_url(self):
         return "/players/%s/" % urlquote(self.email)
 
-#    def get_full_name(self):
-#        return self.name
-
     def get_short_name(self):
         return self.name
 
     def email_user(self, subject, message, from_email=None):
         send_mail(subject, message, from_email, [self.email])
 
-#    def save(self, *args, **kwargs):
-#        self.email = self.email.lower().strip()
-#        if self.email != "": 
-#            if not validate_email(self.email):
-#                raise ValidationError(u"유효하지 않은 이메일입니다.")
-#            if self.email == "":
-#                raise ValidationError(u"메일을 입력해주세요.")
-#        super(Player, self).save(*args, **kwargs)
+
+class Player(BaseUser):
+    """각 선수들에 대한 정보 
+    경기 성적이 아닌 선수 신상 정보 
+    AbstractBaseUser 클래스를 상속 받아 수정
+    email을 id 값으로 사용
+    UserManager도 수정 필요 
+    """
+    team = models.ManyToManyField(Team, blank=True)
+    league = models.ManyToManyField(League, blank=True)
+    university = models.ForeignKey(University, null=True)
 
     def __str__(self):
         return self.email
