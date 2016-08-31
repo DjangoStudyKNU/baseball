@@ -22,7 +22,7 @@ from django.conf import settings
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^university/', include('university.urls', namespace="university")),
-#    url(r'^amateur/', include('amateur.urls', namespace="amateur")),
+    url(r'^amateur/', include('amateur.urls', namespace="amateur")),
 
 ]
 
