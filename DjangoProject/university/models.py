@@ -11,6 +11,7 @@ from django.core.mail import send_mail
 
 class University(models.Model):
     """대학 동아리 팀들이 속한 대학 정보
+    대학별 선수 기록 필터 필요?
     """
     name = models.CharField(max_length=20) # 앞단에서 선택가능하도록 
     region = models.CharField(max_length=50, blank=True) # 대학 선택시 자동으로 입력되게끔
@@ -69,8 +70,8 @@ class CustomUserManager(BaseUserManager):
         return self._create_user(email, password, True, True, **extra_fields)
 
 class BaseUser(AbstractBaseUser, PermissionsMixin):
-    """두 app의 상위 클래스 
-    아마추어 플레이어와 유니벓시티 플레이어의 상위 클래스
+    """amatuer, university models의 Player  상위 클래스
+    AUTH_USER_MODEL 문제로 수정 필요 
     """
     email = models.EmailField(_('email address'), unique=True, max_length=255)
     name = models.CharField(_('name'), max_length=30, blank=True)
@@ -101,11 +102,12 @@ class BaseUser(AbstractBaseUser, PermissionsMixin):
 
 
 class Player(BaseUser):
-    """각 선수들에 대한 정보 
+    """각 선수(유저)들에 대한 정보 
     경기 성적이 아닌 선수 신상 정보 
     AbstractBaseUser 클래스를 상속 받아 수정
     email을 id 값으로 사용
-    UserManager도 수정 필요 
+    UserManager도 수정 필요
+    Permission 관리 필요 
     """
     team = models.ManyToManyField(Team, blank=True)
     league = models.ManyToManyField(League, blank=True)
