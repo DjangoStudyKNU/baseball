@@ -32,5 +32,20 @@ class SignupForm(forms.ModelForm):
 
 
 
-    
+
+class AuthenticationForm(forms.Form):
+    """
+    로그인 하는 폼입니다
+    """
+    email = forms.EmailField(widget=forms.TextInput)
+    password = forms.CharField(widget=forms.PasswordInput)
+
+    class Meta:
+        fields = ['email', 'password']
+
+
+
+
+
+
 
