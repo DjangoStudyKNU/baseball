@@ -27,19 +27,19 @@ class IndexView(ListView):
         return context
 
 class LeagueDetailView(DetailView):
-    model = League
+    model = UniversityLeague
 
 class TeamDetailView(DetailView):
-    model = Team
+    model = UniversityTeam
 
 class UniversityDetailView(DetailView):
     model = University
 
 class LeagueList(ListView):
-    model = League
+    model = UniversityLeague
 
 class TeamList(ListView):
-    model = Team
+    model = UniversityTeam
 
 class UniversityList(ListView):
     model = University

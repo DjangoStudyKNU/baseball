@@ -4,19 +4,19 @@ from university.models import *
 # from university.forms import CustomUserChangeForm, CustomUserCreationForm
 
 
-admin.site.register(Team)
-admin.site.register(League)
-admin.site.register(GamePlace)
+admin.site.register(UniversityTeam)
+admin.site.register(UniversityLeague)
+admin.site.register(UniversityGamePlace)
 admin.site.register(Player)
 admin.site.register(University)
-admin.site.register(GameSchedule)
-admin.site.register(TeamHasLeague)
-admin.site.register(PitcherHasTeam)
-admin.site.register(HitterHasTeam)
-admin.site.register(PitcherHasLeague)
-admin.site.register(HitterHasLeague)
-admin.site.register(GameDetailHitter)
-admin.site.register(GameDetailPitcher)
+admin.site.register(UniversityGameSchedule)
+admin.site.register(UniversityTeamHasLeague)
+admin.site.register(UniversityPitcherHasTeam)
+admin.site.register(UniversityHitterHasTeam)
+admin.site.register(UniversityPitcherHasLeague)
+admin.site.register(UniversityHitterHasLeague)
+admin.site.register(UniversityGameDetailHitter)
+admin.site.register(UniversityGameDetailPitcher)
 
 
 

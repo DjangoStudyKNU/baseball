@@ -4,19 +4,18 @@ from amateur.models import *
 
 
 
-#admin.site.register(Team)
-#admin.site.register(League)
-#admin.site.register(GamePlace)
-#admin.site.register(Player)
-#admin.site.register(Region)
-#admin.site.register(GameSchedule)
-#admin.site.register(TeamHasLeague)
-#admin.site.register(PitcherHasTeam)
-#admin.site.register(HitterHasTeam)
-#admin.site.register(PitcherHasLeague)
-#admin.site.register(HitterHasLeague)
-#admin.site.register(GameDetailHitter)
-#admin.site.register(GameDetailPitcher)
+admin.site.register(AmateurTeam)
+admin.site.register(AmateurLeague)
+admin.site.register(AmateurGamePlace)
+admin.site.register(Region)
+admin.site.register(AmateurGameSchedule)
+admin.site.register(AmateurTeamHasLeague)
+admin.site.register(AmateurPitcherHasTeam)
+admin.site.register(AmateurHitterHasTeam)
+admin.site.register(AmateurPitcherHasLeague)
+admin.site.register(AmateurHitterHasLeague)
+admin.site.register(AmateurGameDetailHitter)
+admin.site.register(AmateurGameDetailPitcher)
 
 
 
