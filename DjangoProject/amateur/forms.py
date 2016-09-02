@@ -1,7 +1,7 @@
 # coding: utf-8
 
 from django import forms
-from amateur.models import Player
+from university.models import Player
 
 class SignupForm(forms.ModelForm):
 

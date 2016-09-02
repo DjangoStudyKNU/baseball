@@ -3,6 +3,23 @@ from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login as django_login, logout as django_logout
 
 
+def signup(request):
+    var = {} # 변수를 렌더링하기 위한 dictionary
+
+    if request.method == "POST":
+        form = SignupForm(data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+
+    else:
+        form = SignupForm()
+        var['form'] = form
+
+    return render(request, 'amateur/signup.html', var)
+
+
+
 def login(request):
 
     """
@@ -21,7 +38,7 @@ def login(request):
 
     else:
         form = AuthenticationForm()
-        var['content'] = form
+        var['form'] = form
 
     return render(request, 'amateur/login.html',  var)
 
