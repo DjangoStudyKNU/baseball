@@ -2,11 +2,11 @@
 
 {% block dashboard %}
 
-    {% for team in player_data.team.all %}
-        <p><a href="{% url 'university:team_detail' team.pk  %}">{{ team.name }}</a></p>
+    {% for team in player_data.university_team.all %}
+        <p><a href="{% url 'university:team_detail' university_team.pk  %}">{{ university_team.name }}</a></p>
     {% endfor %}
-    {% for league in player_data.league.all %}
-        <p><a href="{% url 'university:league_detail' league.pk %}">{{ league.name }}</a></p>
+    {% for league in player_data.university_league.all %}
+        <p><a href="{% url 'university:league_detail' university_league.pk %}">{{ university_league.name }}</a></p>
     {% endfor %}
 
     <p><a href="{% url 'university:university_detail' player_data.university.pk %}">{{ player_data.university.name }}</a></p> 

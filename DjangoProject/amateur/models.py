@@ -38,7 +38,7 @@ class AmateurLeague(models.Model):
     전체 리그 기간 계산 : start_date  - finish_date
     """
     name = models.CharField(max_length=100)
-    logo = models.ImageField()
+    logo = models.ImageField(blank=True)
     manager = models.CharField(max_length=20, blank=True)
     start_date = models.DateField(auto_now_add=True)
     finish_date = models.DateField(blank=True, null=True)
@@ -61,7 +61,8 @@ class AmateurGamePlace(models.Model):
 class AmateurGameSchedule(models.Model):
 
     league = models.ForeignKey(AmateurLeague) # foreignkey를 기준으로 리그별 경기 구별
-    game_date = models.DateField(blank=True)
+    game_date = models.DateField(blank=True, null=True) 
+#########################null=True 는 추후 삭제
     team = models.CharField(max_length=100, blank=True) # 모델상에서는 데이터를 하나만 가지고 있지만 이후에 form상에서 두개의 팀을 입력할 수 있도록 활용.
     place = models.ForeignKey(AmateurGamePlace)
 
