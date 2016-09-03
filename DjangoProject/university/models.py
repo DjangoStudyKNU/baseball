@@ -81,7 +81,6 @@ class Player(AbstractBaseUser, PermissionsMixin):
     UserManager도 수정 필요
     Permission 관리 필요 
     """
-
     email = models.EmailField(_('email address'), unique=True, max_length=255)
     photo = models.ImageField(blank=True)
     name = models.CharField(_('name'), max_length=30, blank=True)
@@ -97,12 +96,12 @@ class Player(AbstractBaseUser, PermissionsMixin):
     # university에서 쓸 부분
     university_team = models.ManyToManyField(UniversityTeam, blank=True)
     university_league = models.ManyToManyField(UniversityLeague, blank=True)
-    university = models.ForeignKey(University, null=True)
+    university = models.ForeignKey(University, blank=True, null=True)
     
     # amatuer에서 쓸 부분 
     amatuer_team = models.ManyToManyField("amateur.AmateurTeam", blank=True)
     amateur_league = models.ManyToManyField("amateur.AmateurLeague", blank=True)
-    region = models.ForeignKey("amateur.Region", null=True)
+    region = models.ForeignKey("amateur.Region", blank=True, null=True)
     
     USERNAME_FIELD = 'email'
 

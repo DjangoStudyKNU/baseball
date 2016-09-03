@@ -27,21 +27,33 @@ class IndexView(ListView):
         return context
 
 class LeagueDetailView(DetailView):
+    """각 리그의 세부 뷰
+    """
     model = UniversityLeague
 
 class TeamDetailView(DetailView):
+    """각 팀의 세부 뷰
+    """
     model = UniversityTeam
 
 class UniversityDetailView(DetailView):
+    """각 학교의 세부 뷰
+    """
     model = University
 
 class LeagueList(ListView):
+    """Legue들의 리스트 뷰
+    """
     model = UniversityLeague
 
 class TeamList(ListView):
+    """Team들의 리스트 뷰
+    """
     model = UniversityTeam
 
 class UniversityList(ListView):
+    """각 University들의 리스트
+    """
     model = University
 
 
