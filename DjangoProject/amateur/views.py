@@ -14,7 +14,7 @@ def signup(request):
         form = SignupForm(data=request.POST)
         if form.is_valid():
             form.save()
-            return redirect('/amateur')
+            return redirect('/')
 
     else:
         form = SignupForm()
@@ -35,7 +35,7 @@ def login(request):
             if user is not None:
                 if user.is_active:
                     django_login(request, user)
-                    return redirect('/amateur')
+                    return redirect('/')
 
     else:
         form = AuthenticationForm()
@@ -54,7 +54,7 @@ def logout(request):
 
 def index(request):
 
-    var = {'comment': 'Here is amateur page.'}
+    var = {'comment': '사회인 야구 페이지입니다.'}
 
     return render(request, 'amateur/index.html', var)
 
