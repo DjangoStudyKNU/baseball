@@ -22,7 +22,7 @@ from django.conf import settings
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^university/', include('university.urls', namespace="university")),
-    # url(r'^amateur/', include('amateur.urls', namespace="amateur")),
+    url(r'^amateur/', include('amateur.urls', namespace="amateur")),
     # 아직 아마추어 url 패턴이 하나도 없어서 일단 주석처리 
 ]
 
