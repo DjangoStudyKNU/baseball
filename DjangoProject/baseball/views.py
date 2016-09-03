@@ -24,7 +24,7 @@ def signup(request):
         form = SignupForm()
         var['form'] = form
 
-    return render(request, 'amateur/signup.html', var)
+    return render(request, 'signup.html', var)
 
 
 def login(request):
@@ -45,7 +45,7 @@ def login(request):
         form = AuthenticationForm()
         var['form'] = form
 
-    return render(request, 'amateur/login.html',  var)
+    return render(request, 'login.html',  var)
 
 
 def logout(request):
