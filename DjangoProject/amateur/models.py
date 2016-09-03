@@ -38,7 +38,7 @@ class AmateurLeague(models.Model):
     전체 리그 기간 계산 : start_date  - finish_date
     """
     name = models.CharField(max_length=100)
-    logo = models.ImageField()
+    logo = models.ImageField(blank=True)
     manager = models.CharField(max_length=20, blank=True)
     start_date = models.DateField(auto_now_add=True)
     finish_date = models.DateField(blank=True, null=True)
