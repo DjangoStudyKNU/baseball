@@ -1,2 +1,4 @@
 DjangoProject/.idea/
-
+__pycache__/
+*.pyc
+*.pyo
