@@ -25,9 +25,8 @@ urlpatterns = [
     url(r'^$', views.index, name="baseball"),
     url(r'^university/', include('university.urls', namespace="university")),
     url(r'^amateur/', include('amateur.urls', namespace="amateur")),
-
-    # 아직 아마추어 url 패턴이 하나도 없어서 일단 주석처리 
 ]
 
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
