@@ -23,6 +23,10 @@ from baseball import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.index, name="baseball"),
+    url(r'^login/$', views.login, name='login'),
+    url(r'^logout/$', views.logout, name='logout'),
+    url(r'^signup/$', views.signup, name='signup'),
+
     url(r'^university/', include('university.urls', namespace="university")),
     url(r'^amateur/', include('amateur.urls', namespace="amateur")),
 ]
