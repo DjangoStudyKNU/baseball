@@ -13,6 +13,7 @@
     {% if request.user.is_authenticated %}
         <h5>{{ request.user.email }}님 환영합니다.</h5>
         <h5><a href="{% url 'logout' %}">로그아웃</a></h5>
+        <h5><a href="{% url 'check' %}">선수정보입력</a></h5>
     {% else %}
         <h5><a href="{% url 'login' %}">로그인</a></h5>
     {% endif %}

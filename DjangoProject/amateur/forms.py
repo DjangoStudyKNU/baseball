@@ -44,6 +44,22 @@ class AuthenticationForm(forms.Form):
         fields = ['email', 'password']
 
 
+class InformationForm(forms.ModelForm):
+
+    class Meta:
+        model = Player
+        fields = ['photo', 'name', 'age', 'main_position', 'height', 'weight', 'player_info']
+
+class PasswordForm(forms.Form):
+    """
+    비밀번호를 확인하는 폼입니다
+    """
+    password = forms.CharField(widget=forms.PasswordInput)
+
+    class Meta:
+        fields = ['password',]
+
+
 
 
 

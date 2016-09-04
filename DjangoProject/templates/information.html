@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>선수정보입력페이지</title>
+</head>
+<body>
+     <form action="{% url 'information' request.user.id %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                    {{ form.as_p }}
+                <button type="submit">저장</button>
+     </form>
+
+
+</body>
+</html>

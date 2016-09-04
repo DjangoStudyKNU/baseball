@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>유저확인페이지</title>
+</head>
+<body>
+<form action="{% url 'check' %}" method="POST">
+    {% csrf_token %}
+    <p>선수정보 입력 전에 본인임을 확인하기 위한 과정입니다 비밀번호를 입력해주세요</p>
+    {{ form.as_p }}
+    <button type="submit">확인</button>
+
+
+</form>
+
+</body>
+</html>
