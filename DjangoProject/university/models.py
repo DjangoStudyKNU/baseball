@@ -92,14 +92,14 @@ class Player(AbstractBaseUser, PermissionsMixin):
     player_info = models.CharField(max_length=20, blank=True) # 우투우타 등의 정보
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=False)
-
+    
     # university에서 쓸 부분
     university_team = models.ManyToManyField(UniversityTeam, blank=True)
     university_league = models.ManyToManyField(UniversityLeague, blank=True)
     university = models.ForeignKey(University, blank=True, null=True)
     
     # amatuer에서 쓸 부분 
-    amatuer_team = models.ManyToManyField("amateur.AmateurTeam", blank=True)
+    amateur_team = models.ManyToManyField("amateur.AmateurTeam", blank=True)
     amateur_league = models.ManyToManyField("amateur.AmateurLeague", blank=True)
     region = models.ForeignKey("amateur.Region", blank=True, null=True)
     

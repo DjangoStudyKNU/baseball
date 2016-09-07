@@ -5,12 +5,29 @@ from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth import authenticate, login as django_login, logout as django_logout
 from university.models import Player
 from django.contrib.auth.decorators import login_required
+from django.views.generic import ListView, FormView, RedirectView
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import never_cache
+from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.debug import sensitive_post_parameters
 
-def index(request):
-    var = {'comment': '메인페이지 입니다'}
 
-    return render(request, 'index.html', var)
+class IndexView(ListView):
+    template_name = "index.html"
+    context_object_name = "player_data"
+    
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(IndexView, self).dispatch(*args, **kwargs)
 
+    def get_queryset(self):
+        return Player.objects.filter(id=self.request.user.id)[0]
+
+    def get_context_data(self, **kwargs):
+        context = super(IndexView, self).get_context_data(**kwargs)
+        context['object_list'] = ['Team', 'League', 'University']
+        return context
+    
 
 
 def signup(request):
