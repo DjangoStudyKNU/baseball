@@ -1,10 +1,14 @@
 # coding: utf-8
 
-from amateur.forms import SignupForm, AuthenticationForm, InformationForm, PasswordForm
+from amateur.forms import SignupForm, InformationForm, PasswordForm#, AuthenticationForm
 from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth import authenticate, login as django_login, logout as django_logout
 from university.models import Player
 from django.contrib.auth.decorators import login_required
+
+from django.contrib.auth.forms import AuthenticationForm
+from django.utils.http import is_safe_url
+from django.contrib.auth import REDIRECT_FIELD_NAME 
 from django.views.generic import ListView, FormView, RedirectView
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import never_cache
@@ -19,7 +23,7 @@ class IndexView(ListView):
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(IndexView, self).dispatch(*args, **kwargs)
-
+    
     def get_queryset(self):
         return Player.objects.filter(id=self.request.user.id)[0]
 
@@ -45,36 +49,33 @@ def signup(request):
 
     return render(request, 'signup.html', var)
 
-
-def login(request):
-
-    # 로그인 과정을 위한 폼입니다
-
-    var = {} # 변수를 렌더하기 위한 dictionary
-    if request.method == "POST":
-        form = AuthenticationForm(data=request.POST)
-        if form.is_valid():
-            user = authenticate(email=request.POST['email'], password=request.POST['password'])
-            if user is not None:
-                if user.is_active:
-                    django_login(request, user)
-                    return redirect('/')
-
-    else:
-        form = AuthenticationForm()
-        var['form'] = form
-
-    return render(request, 'login.html',  var)
-
-class LogoutView(RedirectView):
+class LoginView(FormView):
     """
-    로그 아웃 기능
+    로그인 기능
     """
-    url = '/'
-    
-    def get(self, request, *args, **kwargs):
-        django_logout(request)
-        return super(LogoutView, self).get(request, *args, **kwargs)
+    success_url = '/'
+    form_class = AuthenticationForm
+    redirect_field_name = REDIRECT_FIELD_NAME
+    template_name = 'login.html'
+
+    @method_decorator(sensitive_post_parameters('password'))
+    @method_decorator(csrf_protect)
+    @method_decorator(never_cache)
+    def dispatch(self, request, *args, **kwargs):
+        request.session.set_test_cookie()
+        return super(LoginView, self).dispatch(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        django_login(self.request, form.get_user())
+        if self.request.session.test_cookie_worked():
+            self.request.session.delete_test_cookie()
+        return super(LoginView, self).form_valid(form)
+
+    def get_success_url(self):
+        redirect_to = self.request.GET.get(self.redirect_field_name)
+        if not is_safe_url(url=redirect_to, host=self.request.get_host()):
+            redirect_to = self.success_url
+        return redirect_to
 
 
 @login_required # 로그인해야만 접속할 수 있는 페이지, 장고 기본 제공 데코레이터
