@@ -11,7 +11,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls), # admin page
     url(r'^$', views.IndexView.as_view(), name="baseball"), # 프로젝트 첫 화면 
     url(r'^login/$', views.login, name='login'),
-    url(r'^logout/$', views.logout, name='logout'),
+    url(r'^logout/$', views.LogoutView.as_view(), name='logout'),
     url(r'^signup/$', views.signup, name='signup'),
     url(r'^check/$', views.check, name='check'),
     url(r'^information/(?P<pk_id>.+)/$', views.information, name='information'),

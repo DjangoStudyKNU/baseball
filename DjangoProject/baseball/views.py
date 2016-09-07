@@ -66,12 +66,15 @@ def login(request):
 
     return render(request, 'login.html',  var)
 
-
-def logout(request):
-
-    django_logout(request)
-
-    return redirect('/')
+class LogoutView(RedirectView):
+    """
+    로그 아웃 기능
+    """
+    url = '/'
+    
+    def get(self, request, *args, **kwargs):
+        django_logout(request)
+        return super(LogoutView, self).get(request, *args, **kwargs)
 
 
 @login_required # 로그인해야만 접속할 수 있는 페이지, 장고 기본 제공 데코레이터
