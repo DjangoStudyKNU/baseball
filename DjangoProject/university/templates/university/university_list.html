@@ -1,0 +1,11 @@
+{% extends "base_university.html" %}
+
+{% block dashboard_header %}University List{% endblock %}
+
+{% block dashboard %}
+<ul>
+    {% for university in object_list %}
+        <li><a href="{% url 'university:university_list' university.id %}">{{ university.name }}</a></li>
+    {% endfor %}    
+</ul>
+{% endblock %}
