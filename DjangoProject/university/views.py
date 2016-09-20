@@ -64,8 +64,6 @@ class GameScheduleDetailView(DetailView):
     model = UniversityGameSchedule
 
 
-
-
 ############### 리스트 뷰 #################### 
 
 class PlayerList(ListView):
