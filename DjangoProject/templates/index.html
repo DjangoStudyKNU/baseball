@@ -6,28 +6,6 @@
     <title>Title</title>
 </head>
 <body>
-{% block dashboard_header %}
 
-    {{ comment }}
-    <div>
-    {% if request.user.is_authenticated %}
-        <h5>{{ request.user.email }}님 환영합니다.</h5>
-        <h5><a href="{% url 'logout' %}">로그아웃</a></h5>
-        <h5><a href="{% url 'check' %}">선수정보입력</a></h5>
-    {% else %}
-        <h5><a href="{% url 'login' %}">로그인</a></h5>
-    {% endif %}
-    </div>
-    <div>
-        <p><a href="{% url 'university:index' %}">대학야구리그</a></p>
-    </div>
-{% endblock %}
-
-{% block section_header %} 
-<div>
-    <p><a href="{% url 'amateur:index' %}">사회인야구리그</a></p>
-</div>
-
-{% endblock %}
 </body>
 </html>

@@ -20,8 +20,13 @@
     </div>
     <div>
         <p><a href="{% url 'university:index' %}">대학야구리그</a></p>
-        <p><a href="{% url 'amateur:index' %}">사회인야구리그</a></p>
     </div>
 {% endblock %}
+
+{% block section_header %}
+
+    <p><a href="{% url 'amateur:index' %}">사회인야구리그</a></p>
+{% endblock %}
+
 </body>
 </html>

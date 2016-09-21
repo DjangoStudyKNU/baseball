@@ -16,29 +16,24 @@ from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.debug import sensitive_post_parameters
 
 
+
 class IndexView(TemplateView):
-    """로그인 이전 페이지를 보여주는 뷰
+    """프로젝트 루트 페이지 
     """
     template_name = 'index.html'
-
-class HomeView(ListView):
-    """로그인 이후 페이지 
-    """
-    template_name = "home.html"
     context_object_name = "player_data"
-    
+   
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(HomeView, self).dispatch(*args, **kwargs)
-    
+        return super(IndexView, self).dispatch(*args, **kwargs)
+   
     def get_queryset(self):
         return Player.objects.filter(id=self.request.user.id)[0]
 
     def get_context_data(self, **kwargs):
-        context = super(HomeView, self).get_context_data(**kwargs)
+        context = super(IndexView, self).get_context_data(**kwargs)
         context['object_list'] = ['Team', 'League', 'University']
         return context
-    
 
 
 def signup(request):
@@ -60,7 +55,7 @@ class LoginView(FormView):
     """
     로그인 기능
     """
-    success_url = '/home'
+    success_url = '/'
     form_class = AuthenticationForm
     redirect_field_name = REDIRECT_FIELD_NAME
     template_name = 'login.html'

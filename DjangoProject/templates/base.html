@@ -21,6 +21,7 @@
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
         {% endblock %}
+        
         <title>{% block title %}{% endblock %}</title>
     </head>
     
@@ -80,19 +81,25 @@
         {% endblock %}
         </div>
         
-        
         <div class="col-sm-8 col-sm-offset-4 col-md-9 col-md-offset-3 main">
-            <h1 class="page-header">{% block dashboard_header %}Dashboard{% endblock %}</h1>
+          {% if request.user.is_authenticated %}
+            <h5>{{ request.user.email }} 님 환영합니다.</h5>
+            <h5><a href="{% url 'logout' %}">로그아웃</a></h5>
+            <h5><a href="{% url 'check' %}">선수정보입력</a></h5>
+            <h1 class="page-header"><a href="{% url 'university:index' %}">대학 야구</a></h1>
 
           <div class="row placeholders">
               {% block dashboard %}{% endblock %}
           </div>
 
-          <h1 class="page-header">{% block section_header %}Section title{% endblock %}</h2>
+          <h1 class="page-header"><a href="{% url 'amateur:index' %}">사회인 야구</a></h1>
+            
           <div class="table-responsive">
               {% block section %}{% endblock %} 
           </div>
-      
+          {% else %}
+            <h5><a href="{% url 'login' %}">로그인</a></h5>
+          {% endif %}
         </div>
       </div>
     </div>
